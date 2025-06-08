@@ -1,4 +1,5 @@
 ﻿using agent.Models;
+using Agent.DB;
 using MySql.Data.MySqlClient;
 
 
@@ -8,7 +9,8 @@ namespace agent.Models
         {
         static void Main(string[] args)
             {
-
+            MySqlData mySqlData = new MySqlData();
+            mySqlData.Connect();
             }
         }
     }
