@@ -1,16 +1,31 @@
-﻿using agent.Models;
+﻿using Agent.Models;
 using Agent.DB;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 
-
-namespace agent.Models
+namespace Agent.Models
     {
     class Program
         {
         static void Main(string[] args)
             {
-            MySqlData mySqlData = new MySqlData();
-            mySqlData.Connect();
+            AgentDAL agentDAL = new AgentDAL();
+
+            //create and add new agent
+            //Agent newAgent = new Agent(0, "agent z", "Yaakov","base","active",1);
+            //agentDAL.AddAgent(newAgent);
+
+            //get agents
+            //agentDAL.GetAllAgents();
+            //agentDAL.GetAgent(3);
+
+            //Delete Agent
+            //agentDAL.DeleteAgent(5);
+
+
+            //Update agents location
+            agentDAL.UpdateAgentLocation(2, "home");
+
             }
         }
     }
