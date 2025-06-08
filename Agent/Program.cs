@@ -24,8 +24,9 @@ namespace Agent.Models
 
 
             //Update agents location
-            agentDAL.UpdateAgentLocation(2, "home");
-
+            agentDAL.UpdateAgentLocation(9, "home");
+            agentDAL.UpdateAgentStatus(7, "Missing");
+            agentDAL.UpdateAgentMissions(1);
             }
         }
     }

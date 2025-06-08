@@ -136,7 +136,7 @@ namespace Agent.Models
             return AgentList;
             }
 
-        //Update
+        //Update location
         public void UpdateAgentLocation(int agentId, string newLocation)
             {
             string query = $"UPDATE agents SET location = '{newLocation}' WHERE id = {agentId};";
@@ -145,6 +145,56 @@ namespace Agent.Models
                 {
                 cmd.ExecuteNonQuery();
                 Console.WriteLine("Location Updated.");
+                }
+            catch (Exception ex)
+                {
+                Console.WriteLine(ex.Message);
+                }
+            finally
+                {
+                _sqlData.closeConnection();
+                }
+            }
+
+        //Update Status
+        public void UpdateAgentStatus(int agentId, string newStatus)
+            {
+            string[] statusOptions = { "Active", "Injured", "Missing", "Retired" };
+            if(statusOptions.Contains(newStatus)){
+
+                
+            string query = $"UPDATE agents SET STATUS = '{newStatus}' WHERE id = {agentId};";
+            MySqlCommand cmd = new MySqlCommand(query, _sqlData.GetConnection());
+            try
+                {
+                cmd.ExecuteNonQuery();
+                Console.WriteLine("Status Updated.");
+                }
+            catch (Exception ex)
+                {
+                Console.WriteLine(ex.Message);
+                }
+            finally
+                {
+                _sqlData.closeConnection();
+                }
+                }
+            else
+                {
+                Console.WriteLine("Status not allowed");
+                }
+            }
+
+        //Update location
+        public void UpdateAgentMissions(int agentId, int newMissDone = 1)
+            {
+            Agent current = GetAgent(agentId);
+            string query = $"UPDATE agents SET missionsCompleted = '{current.MissionsCompleted + newMissDone}' WHERE id = {agentId};";
+            MySqlCommand cmd = new MySqlCommand(query, _sqlData.GetConnection());
+            try
+                {
+                cmd.ExecuteNonQuery();
+                Console.WriteLine($"MissionsCompleted added {newMissDone}.");
                 }
             catch (Exception ex)
                 {
