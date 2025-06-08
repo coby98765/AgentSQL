@@ -21,6 +21,8 @@ namespace Agent.Models
             }
 
         // Methods
+
+        //get a single agent
         public Agent GetAgent(int agentId)
             {
             Agent agent = null;
@@ -60,6 +62,7 @@ namespace Agent.Models
             return agent;
             }
 
+        //add a single agent
         public void AddAgent(Agent agent)
             {
             
@@ -90,6 +93,8 @@ namespace Agent.Models
                 _sqlData.closeConnection();
                 }
             }
+        
+        //get all agents
         public List<Agent> GetAllAgents()
             {
             List<Agent> AgentList = new List<Agent>();
@@ -131,7 +136,7 @@ namespace Agent.Models
             return AgentList;
             }
 
-
+        //Update
         public void UpdateAgentLocation(int agentId, string newLocation)
             {
             string query = $"UPDATE agents SET location = '{newLocation}' WHERE id = {agentId};";
@@ -145,10 +150,13 @@ namespace Agent.Models
                 {
                 Console.WriteLine(ex.Message);
                 }
-
+            finally
+                {
+                _sqlData.closeConnection();
+                }
             }
 
-
+        //Delete
         public void DeleteAgent(int agentId)
             {
             string query = $"DELETE FROM agents WHERE agents.id = {agentId};";
@@ -162,8 +170,11 @@ namespace Agent.Models
                 {
                 Console.WriteLine(ex.Message);
                 }
-           
-            }
+            finally
+                {
+                _sqlData.closeConnection();
+                }
 
+            }
         }
     }
